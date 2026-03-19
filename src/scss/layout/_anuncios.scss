@@ -8,16 +8,34 @@
     background-color: lighten($gris, 5);
     border: 1px solid darken($gris, 10);
     margin-bottom: 2rem;
+    overflow: hidden; // ← agrega esto
+
+    img:not(.icono) {
+        width: 100%;
+        height: 15rem;
+        object-fit: cover;
+        display: block;
+    }
 
     .contenido-anuncio {
         padding: 2rem;
     }
 
-    h3, p {
-        margin: 0;
+    h3 {
+        margin: 0 0 1rem 0;
+        font-size: 1.8rem;
     }
- 
+
+    p:not(.precio) {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 1rem;
+    }
 }
+
 .precio {
     color: $verde;
     font-weight: $bold;
@@ -35,30 +53,11 @@
         display: flex;
 
         img {
-            flex:  0 0 3rem;
+            flex: 0 0 3rem;
             margin-right: 1rem;
         }
         p {
             font-weight: $black;
         }
     }
-}
-
-.contenido-nosotros {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-}
-
-.imagen {
-    flex: 1; /* ocupa la mitad izquierda */
-    
-    img {
-        width: 100%;
-        height: auto;
-    }
-}
-
-.texto-nosotros {
-    flex: 1; /* ocupa la mitad derecha */
 }
