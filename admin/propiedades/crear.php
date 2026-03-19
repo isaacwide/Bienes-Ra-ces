@@ -66,10 +66,21 @@
 
 
         if(empty($errores)){
-            $query = "INSERT INTO propiedades (titulo,precio,descripcion,habitaciones,wc,estacionamientos,vendedores_id,creado) VALUES('$titulo','$precio','$descripcion','$habitaciones','$wc','$estacionamientos','$vendedorId',NOW())";
+
+            $carpeta = __DIR__ .'/../../imagenes';
+
+            if(!is_dir($carpeta)){
+               mkdir($carpeta);
+            }
+            
+            $nombreImagen = md5(uniqid(rand(), true)) . '.jpg';
+            move_uploaded_file($imagen['tmp_name'], $carpeta . "/" . $nombreImagen);
+            
+            $query = "INSERT INTO propiedades (titulo,precio,imagen,descripcion,habitaciones,wc,estacionamientos,vendedores_id,creado) VALUES('$titulo','$precio','$nombreImagen','$descripcion','$habitaciones','$wc','$estacionamientos','$vendedorId',NOW())";
             $resultado = mysqli_query($db,$query);
+
             if($resultado){
-                header('Location:/admin');
+                header('Location:/admin?mensaje=1');
             }
         }
 
